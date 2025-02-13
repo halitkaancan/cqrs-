@@ -2,6 +2,7 @@ package com.hkc.cqrs.application.book.command.create;
 
 
 import an.awesome.pipelinr.Command;
+import com.hkc.cqrs.application.book.mapper.BookMapper;
 import com.hkc.cqrs.core.pipelines.auth.AuthenticatedRequest;
 import com.hkc.cqrs.domain.entity.Book;
 import com.hkc.cqrs.persistence.book.BookRepository;
@@ -26,12 +27,18 @@ public class CreateBookCommand implements Command<CreatedBookResponse> , Authent
         @Override
         public CreatedBookResponse handle(CreateBookCommand createdBookCommand) {
 
-            //Mapping -> CreatedBookCommand -> Book
-            Book book = new Book();
-            book.setName(createdBookCommand.getName());
-            bookRepository.save(book);
 
-            return new CreatedBookResponse(book.getId(),book.getName());
+            //manual mapping
+            //Mapping -> CreatedBookCommand -> Book
+//            Book book = new Book();
+//            book.setName(createdBookCommand.getName());
+//            bookRepository.save(book);
+
+            //oto mapping
+            BookMapper mapper = BookMapper.INSTANCE;
+            Book book = mapper.convertCreateCommandToBook(createdBookCommand);
+
+            return mapper.convertBookToCreateBookResponse(book);
         }
     }
 
