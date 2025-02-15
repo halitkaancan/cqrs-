@@ -7,31 +7,26 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.math.BigDecimal;
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
-@Table(name ="book")
+@Table(name = "cart_items")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+@AllArgsConstructor
+public class CartItem {
 
     @UuidGenerator
     @Id
     private UUID id;
-    private String name;
-
-    private BigDecimal price;
+    private int quantity;
 
     @ManyToOne
-    @JoinColumn(name="author_id")
-    private Author author;
+    @JoinColumn(name = "cart_id", nullable = false)
+    private Cart cart;
 
-    @OneToMany(mappedBy = "book")
-    private Set<CartItem> cartItems;
-
-
+    @ManyToOne
+    @JoinColumn(name = "book",nullable = false)
+    private Book book;
 }

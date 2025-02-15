@@ -1,10 +1,11 @@
 package com.hkc.cqrs.application.book.command.update;
 
 import an.awesome.pipelinr.Command;
-import com.hkc.cqrs.core.pipelines.auth.AuthenticatedRequest;
 import com.hkc.cqrs.core.pipelines.auth.AuthorizedRequest;
 import com.hkc.cqrs.domain.entity.Book;
 import com.hkc.cqrs.persistence.book.BookRepository;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +18,9 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UpdateBookCommand implements Command<UpdatedBookResponse>{
 
+    @NotNull
     private UUID id;
+    @NotBlank
     private String name;
 
     @Component

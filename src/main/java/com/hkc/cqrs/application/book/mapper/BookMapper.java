@@ -13,7 +13,7 @@ public interface BookMapper {
     BookMapper INSTANCE = Mappers.getMapper(BookMapper.class);
 
     //Target fonksiton_ismi(Source s)
-    @Mapping(target = "name", source = "name") //mapstruct oto generate edebilsin diye bu özellik kullanılabilir
+    @Mapping(target = "author.id", source = "authorId") //mapstruct oto generate edebilsin diye bu özellik kullanılabilir
     Book convertCreateCommandToBook(CreateBookCommand command);
 
     CreatedBookResponse convertBookToCreateBookResponse(Book book);

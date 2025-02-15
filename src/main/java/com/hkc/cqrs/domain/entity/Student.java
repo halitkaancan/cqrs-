@@ -1,12 +1,12 @@
 package com.hkc.cqrs.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Set;
 
 @Entity
 @Table(name="student")
@@ -17,7 +17,13 @@ import lombok.Setter;
 public class Student extends User {
 
     @Column(name = "student_no")
-    private String studenNo;
+    private String studentNo;
+    @OneToOne(mappedBy = "student")
+    private Cart cart;
+
+    @OneToMany(mappedBy = "")
+    private Set<Order> orders;
+
 
 
 }
