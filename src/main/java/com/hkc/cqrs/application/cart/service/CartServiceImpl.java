@@ -21,4 +21,16 @@ public class CartServiceImpl implements CartService {
         cartRepository.save(cart);
         return cart;
     }
+
+    @Override
+    public Cart getOrCreateCartForStudent(Student student) {
+
+        Cart cart = cartRepository.findByStudentId(student.getId()).orElse(null);
+        //HER CART KONTROLUNDA YOKSA OLUSTUR
+        if (cart == null) {
+            cart =this.createCartForStudent(student);
+            return cart;
+        }
+        return null;
+    }
 }

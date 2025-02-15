@@ -6,5 +6,6 @@ import com.hkc.cqrs.domain.entity.Student;
 public interface CartService {
 
     Cart createCartForStudent(Student student);
+    Cart getOrCreateCartForStudent(Student student);
 
 }
